@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Feedback | Train System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .feedback-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        .feedback-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .rating {
+            color: #ffcc00;
+            font-size: 1.2em;
+        }
+        .no-feedback {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/dashboard" class="logo">TrainSystem</a>
+                <button class="nav-toggle" id="navToggle">☰</button>
+                <ul class="nav-links">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/schedule/view">Train Schedules</a></li>
+                    <li><a href="/schedule/filter">Filter Schedules</a></li>
+                    <li><a href="/bookings">My Bookings</a></li>
+                    <li><a href="/profile">My Profile</a></li>
+                    <li><a href="/feedback" class="active">Feedback</a></li>
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="logout-btn">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>My Feedback History</h1>
+            <p>Review all the feedback you have submitted to our train system.</p>
+        </div>
+
+        <div class="card">
+            <div th:if="${feedbackList.isEmpty()}" class="no-feedback">
+                <p>You haven't submitted any feedback yet.</p>
+                <a href="/feedback" class="btn">Submit New Feedback</a>
+            </div>
+            
+            <div th:unless="${feedbackList.isEmpty()}">
+                <div th:each="feedback : ${feedbackList}" class="feedback-item">
+                    <div class="feedback-meta">
+                        <span th:text="${#temporals.format(feedback.submissionTime, 'dd-MM-yyyy HH:mm')}"></span>
+                        <span th:text="${feedback.category}"></span>
+                    </div>
+                    <div class="rating">
+                        <span th:text="${'★'.repeat(feedback.rating)}"></span>
+                        <span th:text="${'☆'.repeat(5 - feedback.rating)}" style="color: #ccc;"></span>
+                    </div>
+                    <p th:text="${feedback.comment}"></p>
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="/feedback" class="btn">Submit New Feedback</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

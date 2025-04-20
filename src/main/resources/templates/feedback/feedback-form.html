@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback | Train System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .rating-container {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        .rating-container input {
+            display: none;
+        }
+        .rating-container label {
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+            margin-right: 5px;
+        }
+        .rating-container label:hover,
+        .rating-container label:hover ~ label,
+        .rating-container input:checked ~ label {
+            color: #ffcc00;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/dashboard" class="logo">TrainSystem</a>
+                <button class="nav-toggle" id="navToggle">☰</button>
+                <ul class="nav-links">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/schedule/view">Train Schedules</a></li>
+                    <li><a href="/schedule/filter">Filter Schedules</a></li>
+                    <li><a href="/bookings">My Bookings</a></li>
+                    <li><a href="/profile">My Profile</a></li>
+                    <li><a href="/feedback" class="active">Feedback</a></li>
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="logout-btn">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Submit Your Feedback</h1>
+            <p>We value your opinion about our train system. Please share your thoughts with us.</p>
+        </div>
+
+        <div class="card">
+            <form th:action="@{/feedback}" method="post" th:object="${feedback}" id="feedbackForm">
+                <div class="form-group">
+                    <label for="rating">Rating:</label>
+                    <div class="rating-container">
+                        <input type="radio" id="star5" name="rating" th:field="*{rating}" value="5" />
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" th:field="*{rating}" value="4" />
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" th:field="*{rating}" value="3" checked="checked" />
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" th:field="*{rating}" value="2" />
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" th:field="*{rating}" value="1" />
+                        <label for="star1">★</label>
+                    </div>
+                    <div class="error-message" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" th:field="*{category}" class="form-control">
+                        <option value="Booking Experience">Booking Experience</option>
+                        <option value="Travel Experience">Travel Experience</option>
+                        <option value="Website Usability">Website Usability</option>
+                        <option value="Customer Service">Customer Service</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="comment">Your Feedback:</label>
+                    <textarea id="comment" name="comment" th:field="*{comment}" rows="5" class="form-control" 
+                              placeholder="Please share your experience or suggestions (minimum 10 characters)"></textarea>
+                    <div class="error-message" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+                </div>
+
+                <!-- Add this to show general errors -->
+                <div class="error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+                <button type="submit" class="btn">Submit Feedback</button>
+                <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+            </form>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default rating if none selected
+            const ratingInputs = document.querySelectorAll('input[name="rating"]');
+            let hasSelectedRating = false;
+            
+            ratingInputs.forEach(input => {
+                if (input.checked) {
+                    hasSelectedRating = true;
+                }
+            });
+            
+            // If no rating selected, select the middle rating (3) by default
+            if (!hasSelectedRating && ratingInputs.length > 0) {
+                document.getElementById('star3').checked = true;
+            }
+            
+            // Form validation before submit
+            document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+                const comment = document.getElementById('comment').value;
+                
+                // Check if comment is too short
+                if (comment.trim().length < 10) {
+                    event.preventDefault();
+                    const errorElement = document.querySelector('.error-message') || 
+                                         document.createElement('div');
+                    
+                    if (!document.querySelector('.error-message')) {
+                        errorElement.className = 'error-message';
+                        document.getElementById('comment').parentNode.appendChild(errorElement);
+                    }
+                    
+                    errorElement.textContent = 'Comment must be at least 10 characters long';
+                    errorElement.style.display = 'block';
+                    
+                    // Scroll to the error
+                    errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
