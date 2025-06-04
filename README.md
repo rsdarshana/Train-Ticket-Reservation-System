@@ -1,3 +1,5 @@
+
+COMMANDS TO RUN THE PROJECT:
 Build the project:
 ./gradlew build
 (On Windows: gradlew build)
