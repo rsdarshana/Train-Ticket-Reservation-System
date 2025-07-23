@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Train System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/dashboard" class="logo">TrainSystem</a>
+                <button class="nav-toggle" id="navToggle">☰</button>
+                <ul class="nav-links">
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/schedule/view">Train Schedules</a></li>
+                    <li><a href="/schedule/filter">Filter Schedules</a></li>
+                    <li><a href="/bookings">My Bookings</a></li>
+                    <li><a href="/profile">My Profile</a></li>
+                    <li><a href="/feedback">Feedback</a></li>
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="logout-btn">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Welcome, <span th:text="${username}"></span>!</h1>
+            <p>Manage your train schedules and preferences from here.</p>
+        </div>
+
+        <div th:if="${feedbackSuccess}" class="alert-success">
+            Thank you for your feedback! We appreciate your input to help improve our service.
+        </div>
+
+        <div class="card-container">
+            <div class="card">
+                <h3>View All Schedules</h3>
+                <p>Browse complete train schedule information including departure and arrival times.</p>
+                <a href="/schedule/view" class="btn">View Schedules</a>
+            </div>
+            
+            <div class="card">
+                <h3>Filter Schedules</h3>
+                <p>Customize your search with various filters and save your preferences.</p>
+                <a href="/schedule/filter" class="btn">Filter Schedules</a>
+            </div>
+
+            <div class="card">
+                <h3>View My Bookings</h3>
+                <p>See your booked seats, fares, and schedule info.</p>
+                <a href="/bookings" class="btn">View Bookings</a>
+            </div>
+
+            <div class="card">
+                <h3>Submit Feedback</h3>
+                <p>Help us improve by sharing your experience with our train system.</p>
+                <a href="/feedback" class="btn">Submit Feedback</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

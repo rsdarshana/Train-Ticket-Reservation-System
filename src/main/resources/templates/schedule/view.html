@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Schedules | Train System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .error-message {
+            background-color: #ffecec;
+            border-left: 5px solid #f44336;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav>
+            <a href="/dashboard" class="logo">TrainSystem</a>
+            <button class="nav-toggle" id="navToggle">☰</button>
+            <ul class="nav-links">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/schedule/view">Train Schedules</a></li>
+                <li><a href="/schedule/filter">Filter Schedules</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <div class="dashboard-header">
+        <h1>Train Schedules</h1>
+        <p>Complete information about train schedules, departure and arrival times.</p>
+    </div>
+
+    <!-- Error message display -->
+    <div class="error-message" th:if="${errorMessage != null}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <table class="schedule-table">
+        <!-- Update the table header in view.html -->
+        <thead>
+            <tr>
+                <th>Train Number</th>
+                <th>Train Name</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Duration</th>
+                <th>Seats</th>
+                <th>Fare</th>
+                <th>Action</th> <!-- New column for the button -->
+            </tr>
+        </thead>
+
+        <!-- Update the table body in view.html -->
+        <tbody>
+            <tr th:if="${schedules == null || schedules.isEmpty()}">
+                <td colspan="10" th:if="${filtered}" style="text-align: center;">
+                    No matching train schedules found.
+                </td>
+                <td colspan="10" th:unless="${filtered}" style="text-align: center;">
+                    No train schedules available at the moment.
+                </td>
+            </tr>
+            <tr th:each="schedule : ${schedules}" th:if="${schedule != null}">
+                <td th:text="${schedule.train != null ? schedule.train.trainNumber : 'N/A'}"></td>
+                <td th:text="${schedule.train != null ? schedule.train.name : 'N/A'}"></td>
+                <td th:text="${schedule.sourceStation != null ? schedule.sourceStation : 'N/A'}"></td>
+                <td th:text="${schedule.destinationStation != null ? schedule.destinationStation : 'N/A'}"></td>
+                <td th:text="${schedule.departureTime != null ? #temporals.format(schedule.departureTime, 'dd-MM-yyyy HH:mm') : 'N/A'}"></td>
+                <td th:text="${schedule.arrivalTime != null ? #temporals.format(schedule.arrivalTime, 'dd-MM-yyyy HH:mm') : 'N/A'}"></td>
+                <td th:text="${schedule.durationMinutes != null ? (schedule.durationMinutes / 60) + 'h ' + (schedule.durationMinutes % 60) + 'm' : 'N/A'}"></td>
+                <td th:text="${schedule.availableSeats}"></td>
+                <td th:text="${schedule.fare != null ? '₹' + #numbers.formatDecimal(schedule.fare, 1, 2) : 'N/A'}"></td>
+                <td>
+                    <a th:if="${schedule.availableSeats > 0}" 
+                    th:href="@{/seats/{id}(id=${schedule.id})}"
+                    class="btn btn-select">
+                        Select Seats
+                    </a>
+                    <span th:unless="${schedule.availableSeats > 0}" class="text-muted">
+                        Full
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

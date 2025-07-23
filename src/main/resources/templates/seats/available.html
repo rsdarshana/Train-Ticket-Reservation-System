@@ -1,0 +1,88 @@
+<!-- src/main/resources/templates/seats/available.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Seats</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Available Seats for [[${schedule.train.name}]]</h1>
+        <p>Coach Type: [[${selectedCoachType}]] | Seat Type: [[${selectedSeatType}]]</p>
+
+        <form th:action="@{/seats/book}" method="post">
+            <input type="hidden" name="scheduleId" th:value="${schedule.id}">
+
+            <table class="seat-table">
+                <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Coach Number</th>
+                    <th>Seat Number</th>
+                    <th>Type</th>
+                    <th>Fare</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="seat : ${availableSeats}">
+                    <td><input type="checkbox" name="seatIds" th:value="${seat.id}" class="seat-checkbox"></td>
+                    <td th:text="${seat.coachNumber}"></td>
+                    <td th:text="${seat.seatNumber}"></td>
+                    <td th:text="${seat.seatType}"></td>
+                    <td th:text="${seat.fare}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- Hidden inputs will be added here by JavaScript for selected seats only -->
+            <div id="selectedSeatsData"></div>
+
+            <button type="submit" class="btn btn-primary">Confirm Booking & Go To Payment Page</button>
+        </form>
+    </div>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        // Clear previous hidden inputs
+        document.getElementById('selectedSeatsData').innerHTML = '';
+
+        // Get all checked checkboxes
+        const checkedBoxes = document.querySelectorAll('.seat-checkbox:checked');
+
+        // For each checked box, find its row and add hidden inputs
+        checkedBoxes.forEach(function(checkbox) {
+            const row = checkbox.closest('tr');
+            const coachNumber = row.cells[1].textContent;
+            const seatNumber = row.cells[2].textContent;
+            const seatType = row.cells[3].textContent;
+
+            // Create hidden inputs for selected seat
+            const container = document.getElementById('selectedSeatsData');
+
+            const coachInput = document.createElement('input');
+            coachInput.type = 'hidden';
+            coachInput.name = 'coachNumber';
+            coachInput.value = coachNumber;
+            container.appendChild(coachInput);
+
+            const seatNumInput = document.createElement('input');
+            seatNumInput.type = 'hidden';
+            seatNumInput.name = 'seatNumber';
+            seatNumInput.value = seatNumber;
+            container.appendChild(seatNumInput);
+
+            const seatTypeInput = document.createElement('input');
+            seatTypeInput.type = 'hidden';
+            seatTypeInput.name = 'seatType';
+            seatTypeInput.value = seatType;
+            container.appendChild(seatTypeInput);
+        });
+
+        // If no seats selected, prevent form submission
+        if (checkedBoxes.length === 0) {
+            e.preventDefault();
+            alert('Please select at least one seat');
+        }
+    });
+</script>
+</html>

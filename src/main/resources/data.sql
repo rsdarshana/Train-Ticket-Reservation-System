@@ -1,0 +1,175 @@
+-- Insert Users
+INSERT INTO USERS (USERNAME, PASSWORD, EMAIL)
+VALUES ('mahima', '12345', 'test@gmail.com');
+
+-- Insert Trains (removed TYPE column)
+INSERT INTO TRAIN (ID, TRAIN_NUMBER, NAME, TOTAL_SEATS) VALUES (1, '10101', 'Shatabdi Express', 300);
+INSERT INTO TRAIN (ID, TRAIN_NUMBER, NAME, TOTAL_SEATS) VALUES (2, '10102', 'Rajdhani Express', 400);
+INSERT INTO TRAIN (ID, TRAIN_NUMBER, NAME, TOTAL_SEATS) VALUES (3, '10103', 'Duronto Express', 250);
+INSERT INTO TRAIN (ID, TRAIN_NUMBER, NAME, TOTAL_SEATS) VALUES (4, '10104', 'Intercity Express', 350);
+INSERT INTO TRAIN (ID, TRAIN_NUMBER, NAME, TOTAL_SEATS) VALUES (5, '10105', 'Superfast Express', 320);
+
+-- Insert Train Schedules (with baseline fares)
+-- Train 1: Shatabdi Express
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (1, 1, 'Mumbai', 'Pune', '2025-04-06 08:00:00', '2025-04-06 10:30:00', 150, 80, 600.00);
+
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (2, 1, 'Pune', 'Mumbai', '2025-04-06 15:00:00', '2025-04-06 17:30:00', 150, 100, 600.00);
+
+-- Train 2: Rajdhani Express
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (3, 2, 'Delhi', 'Bhopal', '2025-04-06 06:00:00', '2025-04-06 13:00:00', 420, 120, 800.00);
+
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (10, 2, 'Delhi', 'Mumbai', '2025-04-06 18:00:00', '2025-04-07 08:00:00', 840, 130, 1800.00);
+
+-- Train 3: Duronto Express
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (4, 3, 'Chennai', 'Bangalore', '2025-04-06 07:45:00', '2025-04-06 11:30:00', 225, 90, 950.00);
+
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (5, 3, 'Chennai', 'Coimbatore', '2025-04-06 14:00:00', '2025-04-06 19:15:00', 315, 110, 1150.00);
+
+-- Train 4: Intercity Express
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (6, 4, 'Hyderabad', 'Vijayawada', '2025-04-06 09:30:00', '2025-04-06 12:45:00', 195, 60, 400.00);
+
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (7, 4, 'Hyderabad', 'Vizag', '2025-04-06 14:15:00', '2025-04-06 21:00:00', 405, 70, 300.00);
+
+-- Train 5: Superfast Express
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (8, 5, 'Kolkata', 'Ranchi', '2025-04-06 06:00:00', '2025-04-06 12:30:00', 390, 100, 700.00);
+
+INSERT INTO TRAIN_SCHEDULE (ID, TRAIN_ID, SOURCE_STATION, DESTINATION_STATION, DEPARTURE_TIME, ARRIVAL_TIME, DURATION_MINUTES, AVAILABLE_SEATS, FARE)
+VALUES (9, 5, 'Kolkata', 'Patna', '2025-04-06 14:00:00', '2025-04-06 22:00:00', 480, 85, 650.00);
+
+-- Insert Train Schedule Stoppages with STOP_ORDER (unchanged)
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (1, 'Thane', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (1, 'Lonavala', 2);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (2, 'Lonavala', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (2, 'Thane', 2);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (3, 'Agra', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (3, 'Jhansi', 2);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (4, 'Vellore', 1);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (5, 'Salem', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (5, 'Erode', 2);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (6, 'Secunderabad', 1);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (7, 'Guntur', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (7, 'Rajahmundry', 2);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (8, 'Asansol', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (8, 'Dhanbad', 2);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (9, 'Bardhaman', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (9, 'Mokama', 2);
+
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (10, 'Kota', 1);
+INSERT INTO TRAIN_SCHEDULE_STOPPAGES (TRAIN_SCHEDULE_ID, STOPPAGES, STOP_ORDER) VALUES (10, 'Vadodara', 2);
+
+-- Schedule 1: Shatabdi Express (Mumbai-Pune) - Base fare 600
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Sleeper AC coaches (A1-A3) - Premium over base fare
+(1, 'A1', '1', 'SLEEPER_AC', 'WINDOW', false, 750), (1, 'A1', '2', 'SLEEPER_AC', 'MIDDLE', false, 650), (1, 'A1', '3', 'SLEEPER_AC', 'AISLE', false, 700),
+(1, 'A1', '4', 'SLEEPER_AC', 'WINDOW', false, 750), (1, 'A1', '5', 'SLEEPER_AC', 'MIDDLE', false, 650), (1, 'A1', '6', 'SLEEPER_AC', 'AISLE', false, 700),
+(1, 'A2', '1', 'SLEEPER_AC', 'WINDOW', false, 750), (1, 'A2', '2', 'SLEEPER_AC', 'MIDDLE', false, 650), (1, 'A2', '3', 'SLEEPER_AC', 'AISLE', false, 700),
+(1, 'A2', '4', 'SLEEPER_AC', 'WINDOW', false, 750), (1, 'A2', '5', 'SLEEPER_AC', 'MIDDLE', false, 650), (1, 'A2', '6', 'SLEEPER_AC', 'AISLE', false, 700),
+(1, 'A3', '1', 'SLEEPER_AC', 'WINDOW', false, 750), (1, 'A3', '2', 'SLEEPER_AC', 'MIDDLE', false, 650), (1, 'A3', '3', 'SLEEPER_AC', 'AISLE', false, 700),
+(1, 'A3', '4', 'SLEEPER_AC', 'WINDOW', false, 750), (1, 'A3', '5', 'SLEEPER_AC', 'MIDDLE', false, 650), (1, 'A3', '6', 'SLEEPER_AC', 'AISLE', false, 700),
+
+-- Chair Car AC coaches (B1-B3) - Higher premium
+(1, 'B1', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (1, 'B1', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (1, 'B1', '3', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+(1, 'B1', '4', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (1, 'B1', '5', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (1, 'B1', '6', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+(1, 'B2', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (1, 'B2', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (1, 'B2', '3', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+(1, 'B2', '4', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (1, 'B2', '5', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (1, 'B2', '6', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+(1, 'B3', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (1, 'B3', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (1, 'B3', '3', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+(1, 'B3', '4', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (1, 'B3', '5', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (1, 'B3', '6', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+
+-- Sleeper Non-AC coaches (C1-C2) - Discount from base fare
+(1, 'C1', '1', 'SLEEPER_NON_AC', 'WINDOW', false, 500), (1, 'C1', '2', 'SLEEPER_NON_AC', 'MIDDLE', false, 450), (1, 'C1', '3', 'SLEEPER_NON_AC', 'AISLE', false, 480),
+(1, 'C1', '4', 'SLEEPER_NON_AC', 'WINDOW', false, 500), (1, 'C1', '5', 'SLEEPER_NON_AC', 'MIDDLE', false, 450), (1, 'C1', '6', 'SLEEPER_NON_AC', 'AISLE', false, 480),
+(1, 'C2', '1', 'SLEEPER_NON_AC', 'WINDOW', false, 500), (1, 'C2', '2', 'SLEEPER_NON_AC', 'MIDDLE', false, 450), (1, 'C2', '3', 'SLEEPER_NON_AC', 'AISLE', false, 480),
+(1, 'C2', '4', 'SLEEPER_NON_AC', 'WINDOW', false, 500), (1, 'C2', '5', 'SLEEPER_NON_AC', 'MIDDLE', false, 450), (1, 'C2', '6', 'SLEEPER_NON_AC', 'AISLE', false, 480);
+
+-- Schedule 2: Shatabdi Express (Pune-Mumbai) - Base fare 600
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Sleeper AC coaches
+(2, 'A1', '1', 'SLEEPER_AC', 'WINDOW', false, 750), (2, 'A1', '2', 'SLEEPER_AC', 'MIDDLE', false, 650), (2, 'A1', '3', 'SLEEPER_AC', 'AISLE', false, 700),
+(2, 'A1', '4', 'SLEEPER_AC', 'WINDOW', false, 750), (2, 'A1', '5', 'SLEEPER_AC', 'MIDDLE', false, 650), (2, 'A1', '6', 'SLEEPER_AC', 'AISLE', false, 700),
+-- Chair Car AC coaches
+(2, 'B1', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (2, 'B1', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (2, 'B1', '3', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+(2, 'B1', '4', 'CHAIR_CAR_AC', 'WINDOW', false, 850), (2, 'B1', '5', 'CHAIR_CAR_AC', 'MIDDLE', false, 750), (2, 'B1', '6', 'CHAIR_CAR_AC', 'AISLE', false, 800),
+-- Sleeper Non-AC coaches
+(2, 'C1', '1', 'SLEEPER_NON_AC', 'WINDOW', false, 500), (2, 'C1', '2', 'SLEEPER_NON_AC', 'MIDDLE', false, 450), (2, 'C1', '3', 'SLEEPER_NON_AC', 'AISLE', false, 480),
+(2, 'C1', '4', 'SLEEPER_NON_AC', 'WINDOW', false, 500), (2, 'C1', '5', 'SLEEPER_NON_AC', 'MIDDLE', false, 450), (2, 'C1', '6', 'SLEEPER_NON_AC', 'AISLE', false, 480);
+
+-- Schedule 3: Rajdhani Express (Delhi-Bhopal) - Base fare 800
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- 5 AC coaches with premium pricing
+(3, 'A1', '1', 'SLEEPER_AC', 'WINDOW', false, 1000), (3, 'A1', '2', 'SLEEPER_AC', 'MIDDLE', false, 900), (3, 'A1', '3', 'SLEEPER_AC', 'AISLE', false, 950),
+(3, 'A1', '4', 'SLEEPER_AC', 'WINDOW', false, 1000), (3, 'A1', '5', 'SLEEPER_AC', 'MIDDLE', false, 900), (3, 'A1', '6', 'SLEEPER_AC', 'AISLE', false, 950),
+(3, 'A2', '1', 'SLEEPER_AC', 'WINDOW', false, 1000), (3, 'A2', '2', 'SLEEPER_AC', 'MIDDLE', false, 900), (3, 'A2', '3', 'SLEEPER_AC', 'AISLE', false, 950),
+(3, 'A2', '4', 'SLEEPER_AC', 'WINDOW', false, 1000), (3, 'A2', '5', 'SLEEPER_AC', 'MIDDLE', false, 900), (3, 'A2', '6', 'SLEEPER_AC', 'AISLE', false, 950);
+
+-- Schedule 4: Duronto Express (Chennai-Bangalore) - Base fare 950
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- 4 AC coaches with premium pricing
+(4, 'A1', '1', 'SLEEPER_AC', 'WINDOW', false, 1150), (4, 'A1', '2', 'SLEEPER_AC', 'MIDDLE', false, 1050), (4, 'A1', '3', 'SLEEPER_AC', 'AISLE', false, 1100),
+(4, 'A1', '4', 'SLEEPER_AC', 'WINDOW', false, 1150), (4, 'A1', '5', 'SLEEPER_AC', 'MIDDLE', false, 1050), (4, 'A1', '6', 'SLEEPER_AC', 'AISLE', false, 1100),
+(4, 'A2', '1', 'SLEEPER_AC', 'WINDOW', false, 1150), (4, 'A2', '2', 'SLEEPER_AC', 'MIDDLE', false, 1050), (4, 'A2', '3', 'SLEEPER_AC', 'AISLE', false, 1100),
+(4, 'A2', '4', 'SLEEPER_AC', 'WINDOW', false, 1150), (4, 'A2', '5', 'SLEEPER_AC', 'MIDDLE', false, 1050), (4, 'A2', '6', 'SLEEPER_AC', 'AISLE', false, 1100);
+
+-- Schedule 5: Duronto Express (Chennai-Coimbatore) - Base fare 1150
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Similar to Schedule 4 with adjusted pricing
+(5, 'A1', '1', 'SLEEPER_AC', 'WINDOW', false, 1350), (5, 'A1', '2', 'SLEEPER_AC', 'MIDDLE', false, 1250), (5, 'A1', '3', 'SLEEPER_AC', 'AISLE', false, 1300),
+(5, 'A1', '4', 'SLEEPER_AC', 'WINDOW', false, 1350), (5, 'A1', '5', 'SLEEPER_AC', 'MIDDLE', false, 1250), (5, 'A1', '6', 'SLEEPER_AC', 'AISLE', false, 1300);
+
+-- Schedule 6: Intercity Express (Hyderabad-Vijayawada) - Base fare 400
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Mix of AC and Non-AC coaches
+(6, 'A1', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 550), (6, 'A1', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 500), (6, 'A1', '3', 'CHAIR_CAR_AC', 'AISLE', false, 520),
+(6, 'C1', '1', 'SLEEPER_NON_AC', 'WINDOW', false, 350), (6, 'C1', '2', 'SLEEPER_NON_AC', 'MIDDLE', false, 320), (6, 'C1', '3', 'SLEEPER_NON_AC', 'AISLE', false, 330);
+
+-- Schedule 7: Intercity Express (Hyderabad-Vizag) - Base fare 300
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Similar to Schedule 6
+(7, 'A1', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 450), (7, 'A1', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 400), (7, 'A1', '3', 'CHAIR_CAR_AC', 'AISLE', false, 420),
+(7, 'C1', '1', 'SLEEPER_NON_AC', 'WINDOW', false, 250), (7, 'C1', '2', 'SLEEPER_NON_AC', 'MIDDLE', false, 220), (7, 'C1', '3', 'SLEEPER_NON_AC', 'AISLE', false, 230);
+
+-- Schedule 8: Superfast Express (Kolkata-Ranchi) - Base fare 700
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Sleeper Non-AC coaches
+(8, 'A1', '1', 'SLEEPER_NON_AC', 'WINDOW', false, 600), (8, 'A1', '2', 'SLEEPER_NON_AC', 'MIDDLE', false, 550), (8, 'A1', '3', 'SLEEPER_NON_AC', 'AISLE', false, 580),
+(8, 'A1', '4', 'SLEEPER_NON_AC', 'WINDOW', false, 600), (8, 'A1', '5', 'SLEEPER_NON_AC', 'MIDDLE', false, 550), (8, 'A1', '6', 'SLEEPER_NON_AC', 'AISLE', false, 580),
+-- Chair Car Non-AC coaches
+(8, 'B1', '1', 'CHAIR_CAR_NON_AC', 'WINDOW', false, 500), (8, 'B1', '2', 'CHAIR_CAR_NON_AC', 'MIDDLE', false, 450), (8, 'B1', '3', 'CHAIR_CAR_NON_AC', 'AISLE', false, 480),
+(8, 'B1', '4', 'CHAIR_CAR_NON_AC', 'WINDOW', false, 500), (8, 'B1', '5', 'CHAIR_CAR_NON_AC', 'MIDDLE', false, 450), (8, 'B1', '6', 'CHAIR_CAR_NON_AC', 'AISLE', false, 480),
+-- Sleeper AC coaches
+(8, 'A2', '1', 'SLEEPER_AC', 'WINDOW', false, 850), (8, 'A2', '2', 'SLEEPER_AC', 'MIDDLE', false, 800), (8, 'A2', '3', 'SLEEPER_AC', 'AISLE', false, 830),
+-- Chair Car AC coaches
+(8, 'B2', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 750), (8, 'B2', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 700), (8, 'B2', '3', 'CHAIR_CAR_AC', 'AISLE', false, 730);
+
+-- Schedule 9: Superfast Express (Kolkata-Patna) - Base fare 650
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Sleeper AC coaches
+(9, 'A1', '1', 'SLEEPER_AC', 'WINDOW', false, 800), (9, 'A1', '2', 'SLEEPER_AC', 'MIDDLE', false, 750), (9, 'A1', '3', 'SLEEPER_AC', 'AISLE', false, 780),
+(9, 'A1', '4', 'SLEEPER_AC', 'WINDOW', false, 800), (9, 'A1', '5', 'SLEEPER_AC', 'MIDDLE', false, 750), (9, 'A1', '6', 'SLEEPER_AC', 'AISLE', false, 780),
+-- Chair Car AC coaches
+(9, 'B1', '1', 'CHAIR_CAR_AC', 'WINDOW', false, 700), (9, 'B1', '2', 'CHAIR_CAR_AC', 'MIDDLE', false, 650), (9, 'B1', '3', 'CHAIR_CAR_AC', 'AISLE', false, 680),
+(9, 'B1', '4', 'CHAIR_CAR_AC', 'WINDOW', false, 700), (9, 'B1', '5', 'CHAIR_CAR_AC', 'MIDDLE', false, 650), (9, 'B1', '6', 'CHAIR_CAR_AC', 'AISLE', false, 680);
+
+-- Schedule 10: Rajdhani Express (Delhi-Mumbai) - Base fare 1800
+INSERT INTO SEAT (TRAIN_SCHEDULE_ID, COACH_NUMBER, SEAT_NUMBER, COACH_TYPE, SEAT_TYPE, IS_BOOKED, FARE) VALUES
+-- Sleeper AC coaches (premium long-distance route)
+(10, 'A1', '1', 'SLEEPER_AC', 'WINDOW', false, 2100), (10, 'A1', '2', 'SLEEPER_AC', 'MIDDLE', false, 1950), (10, 'A1', '3', 'SLEEPER_AC', 'AISLE', false, 2000),
+(10, 'A1', '4', 'SLEEPER_AC', 'WINDOW', false, 2100), (10, 'A1', '5', 'SLEEPER_AC', 'MIDDLE', false, 1950), (10, 'A1', '6', 'SLEEPER_AC', 'AISLE', false, 2000),
+(10, 'A2', '1', 'SLEEPER_AC', 'WINDOW', false, 2100), (10, 'A2', '2', 'SLEEPER_AC', 'MIDDLE', false, 1950), (10, 'A2', '3', 'SLEEPER_AC', 'AISLE', false, 2000),
+(10, 'A2', '4', 'SLEEPER_AC', 'WINDOW', false, 2100), (10, 'A2', '5', 'SLEEPER_AC', 'MIDDLE', false, 1950), (10, 'A2', '6', 'SLEEPER_AC', 'AISLE', false, 2000);

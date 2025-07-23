@@ -1,0 +1,40 @@
+<!-- src/main/resources/templates/seats/selection.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Seat Selection</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Seat Selection for [[${schedule.train.name}]]</h1>
+        <p>From [[${schedule.sourceStation}]] to [[${schedule.destinationStation}]]</p>
+        
+        <form th:action="@{/seats/available}" method="post">
+            <input type="hidden" name="scheduleId" th:value="${schedule.id}">
+            
+            <div class="form-group">
+                <label for="coachType">Coach Type:</label>
+                <select id="coachType" name="coachType" class="form-control" required>
+                    <option value="">Select Coach Type</option>
+                    <option th:each="type : ${coachTypes}" 
+                            th:value="${type}" 
+                            th:text="${type}">Coach Type</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="seatType">Seat Type:</label>
+                <select id="seatType" name="seatType" class="form-control" required>
+                    <option value="">Select Seat Type</option>
+                    <option th:each="type : ${seatTypes}" 
+                            th:value="${type}" 
+                            th:text="${type}">Seat Type</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Show Available Seats</button>
+        </form>
+    </div>
+</body>
+</html>
